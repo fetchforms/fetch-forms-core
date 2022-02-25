@@ -30,6 +30,7 @@
 		"@babel/runtime": "^7.17.2"
 	},
 	"dependencies": {
-		"@babel/runtime": "^7.17.2"
+		"@babel/runtime": "^7.17.2",
+		"final-form": "^4.20.6"
 	}
 }
