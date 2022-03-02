@@ -18,7 +18,7 @@ export default async function createFormItem(fieldJson) {
 
 function buildField(fieldJson) {
 	const label = createLabel(fieldJson.label, fieldJson.name);
-	const errorMsg = createFieldError(fieldJson.fieldHtml.id);
+	const errorMsg = createFieldError(fieldJson.fieldHtml.name);
 
 	if (fieldJson.fieldType == "select") {
 		return [label, createSelect(fieldJson.fieldHtml, fieldJson.options), errorMsg];

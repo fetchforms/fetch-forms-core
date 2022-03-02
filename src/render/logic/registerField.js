@@ -7,7 +7,7 @@ export default function registerField(input, field, form) {
 		name,
 		(fieldState) => {
 			const { blur, change, error, focus, touched, value } = fieldState;
-			const errorElement = document.getElementById(id + "_error");
+			const errorElement = document.getElementById(name + "_error");
 			if (!registered[id]) {
 				// first time, register event listeners
 				input.addEventListener("blur", () => blur());
