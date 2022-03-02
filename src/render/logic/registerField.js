@@ -1,8 +1,22 @@
 import { formatValue } from "../logic/formatting";
 let registered = {};
 
-export default function registerField(input, field, form) {
+export default function registerField(input, fetchFields, form) {
+	if (!input.name) {
+		return;
+	}
+
+	const field = fetchFields.find((field) => field.name === input.name);
+	if (input.type === "radio") {
+		addFieldToForm(input, field.options, form);
+	} else {
+		addFieldToForm(input, field, form);
+	}
+}
+
+function addFieldToForm(input, field, form) {
 	const { id, name } = input;
+
 	form.registerField(
 		name,
 		(fieldState) => {

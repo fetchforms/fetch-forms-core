@@ -10,6 +10,7 @@ import "../styles/fetch-forms.scss";
 
 export default async function createFetchForm(formId, elementId, onComplete) {
 	const placement = document.getElementById(elementId);
+	placement.classList.add("fetch-form");
 	let fetchForm;
 	let submitButton;
 
@@ -44,24 +45,9 @@ export default async function createFetchForm(formId, elementId, onComplete) {
 	submitButton = createSubmitButton(fetchForm.submitText);
 	htmlForm.appendChild(submitButton);
 
-	const wrapper = document.createElement("div");
-	wrapper.setAttribute("class", "fetch-form");
-	wrapper.appendChild(htmlForm);
+	[...htmlForm].forEach((input) => registerField(input, fetchForm.formItems, form));
 
-	placement.appendChild(wrapper);
-
-	[...htmlForm].forEach((input) => {
-		if (!input.name) {
-			return;
-		}
-
-		const field = fetchForm.formItems.find((field) => field.name === input.name);
-		if (input.type === "radio") {
-			registerField(input, field.options, form);
-		} else {
-			registerField(input, field, form);
-		}
-	});
+	placement.appendChild(htmlForm);
 
 	async function onSubmit(values) {
 		submitButton.setAttribute("disabled", "disabled");
