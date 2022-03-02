@@ -1,5 +1,3 @@
-const path = require("path");
-
 module.exports = {
 	entry: {
 		app: "./src/index.js",
@@ -7,7 +5,6 @@ module.exports = {
 	output: {
 		filename: "fetchforms.js",
 		library: "fetchforms",
-		path: path.resolve(__dirname, "dist"),
 		clean: true,
 	},
 	module: {
@@ -20,14 +17,7 @@ module.exports = {
 			{
 				test: /\.s[ac]ss$/i,
 				exclude: /(node_modules)/,
-				use: [
-					// Creates `style` nodes from JS strings
-					"style-loader",
-					// Translates CSS into CommonJS
-					"css-loader",
-					// Compiles Sass to CSS
-					"sass-loader",
-				],
+				use: ["style-loader", "css-loader", "sass-loader"],
 			},
 		],
 	},

@@ -8,16 +8,18 @@ import { validate } from "./logic/validation";
 import registerField from "./logic/registerField";
 import "../styles/fetch-forms.scss";
 
-export default async function createFetchForm(formId, elementId, onComplete) {
-	const placement = document.getElementById(elementId);
-	placement.classList.add("fetch-form");
+export default async function createFetchForm(formId, onCompleteCallback, onDataCallback) {
+	const currentScript = document.currentScript;
+	const placement = document.createElement("div");
+	placement.setAttribute("class", "fetch-form");
 	let fetchForm;
 	let submitButton;
 
 	try {
 		fetchForm = await getForm(formId);
+		onDataCallback({ name: fetchForm.name, id: fetchForm.id, version: fetchForm.version });
 	} catch (err) {
-		console.error("Error on useFetchForms", err);
+		console.error("Error on render form", err);
 		placement.appendChild(createAlert(err));
 		return;
 	}
@@ -48,6 +50,7 @@ export default async function createFetchForm(formId, elementId, onComplete) {
 	[...htmlForm].forEach((input) => registerField(input, fetchForm.formItems, form));
 
 	placement.appendChild(htmlForm);
+	currentScript.after(placement);
 
 	async function onSubmit(values) {
 		submitButton.setAttribute("disabled", "disabled");
@@ -69,15 +72,15 @@ export default async function createFetchForm(formId, elementId, onComplete) {
 		}
 
 		try {
-			// 	if (fetchForm.cloudSave) {
-			// 		const isSaved = await doCloudSubmit(fetchForm.id, formattedValues);
-			// 		if (!isSaved.success) {
-			// 			throw isSaved.message;
-			// 		}
-			// 	}
+			if (fetchForm.cloudSave) {
+				const isSaved = await doCloudSubmit(fetchForm.id, formattedValues);
+				if (!isSaved.success) {
+					throw isSaved.message;
+				}
+			}
 
 			if (onComplete) {
-				const hasError = await onComplete(formattedValues);
+				const hasError = await onCompleteCallback(formattedValues);
 				if (hasError) {
 					throw hasError;
 				}

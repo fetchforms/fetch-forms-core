@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fetch Forms Core</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet"> 
+  <script src="./fetchforms.js"></script>
+</head>
+<style>
+  body { font-family: 'Montserrat', sans-serif;}
+</style>
+<body>
+  <div id="app" style="max-width: 600px; margin: auto; padding: 0px 30px 30px 0px">
+    <h1 id="form_name"></h1>
+    <script>
+        const onComplete = (data) => {
+            document.getElementById('result').innerHTML = JSON.stringify(data);
+        }
+        const onData = (data) => {
+            document.getElementById('form_name').innerHTML = data.name;
+        }
+
+        fetchforms.setPermission('92a7a5221aef332efa00bd23012ad6b2');
+        fetchforms.renderForm('fcd4ca8b-12d4-4b8c-882d-00144d54d02c', onComplete, onData);
+    </script>
+    <div id="result"></div>
+  </div>
+<body>
+</body>
+</html>

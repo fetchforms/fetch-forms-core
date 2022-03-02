@@ -1,5 +1,5 @@
-import { getForm, buildJsonForm } from "./api/forms";
+import { getForm, requestBuild } from "./api/forms";
 import { setPermission } from "./auth/permission";
-import createFetchForm from "./render/index";
+import renderForm from "./render/index";
 
-export { getForm, buildJsonForm, setPermission, createFetchForm };
+export { getForm, requestBuild, setPermission, renderForm };
