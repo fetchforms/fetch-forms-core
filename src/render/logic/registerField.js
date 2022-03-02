@@ -35,9 +35,11 @@ export default function registerField(input, field, form) {
 				if (touched && error) {
 					errorElement.innerHTML = error;
 					errorElement.classList.add("show");
+					input.classList.add("fetch-has-error");
 				} else {
 					errorElement.innerHTML = "";
 					errorElement.classList.remove("show");
+					input.classList.remove("fetch-has-error");
 				}
 			}
 		},
