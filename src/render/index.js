@@ -6,11 +6,11 @@ import createHtmlForm from "./components/createHtmlForm";
 import { createForm } from "final-form";
 import { validate } from "./logic/validation";
 import registerField from "./logic/registerField";
+import cloudSave from "../api/cloudSave";
 import "../styles/fetch-forms.scss";
 
-export default async function createFetchForm(formId, onCompleteCallback, onDataCallback) {
-	const currentScript = document.currentScript;
-	const placement = document.createElement("div");
+export default async function createFetchForm(formId, elementId, onCompleteCallback, onDataCallback) {
+	const placement = document.getElementById(elementId);
 	placement.setAttribute("class", "fetch-form");
 	let fetchForm;
 	let submitButton;
@@ -50,12 +50,9 @@ export default async function createFetchForm(formId, onCompleteCallback, onData
 	[...htmlForm].forEach((input) => registerField(input, fetchForm.formItems, form));
 
 	placement.appendChild(htmlForm);
-	currentScript.after(placement);
 
 	async function onSubmit(values) {
 		submitButton.setAttribute("disabled", "disabled");
-
-		document.getElementById("fetch_form_result").innerHTML = "";
 		const formattedValues = {
 			...values,
 		};
@@ -73,13 +70,13 @@ export default async function createFetchForm(formId, onCompleteCallback, onData
 
 		try {
 			if (fetchForm.cloudSave) {
-				const isSaved = await doCloudSubmit(fetchForm.id, formattedValues);
+				const isSaved = await cloudSave(fetchForm.id, formattedValues);
 				if (!isSaved.success) {
 					throw isSaved.message;
 				}
 			}
 
-			if (onComplete) {
+			if (onCompleteCallback) {
 				const hasError = await onCompleteCallback(formattedValues);
 				if (hasError) {
 					throw hasError;

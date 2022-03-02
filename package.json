@@ -1,19 +1,42 @@
 {
-	"name": "fetch-forms-javascript",
-	"version": "0.1.0",
-	"description": "The javascript library for fetch forms",
-	"main": "dist/index.js",
+	"name": "@fetchforms/core",
+	"version": "1.0.0",
+	"description": "The core javascript library for Fetch Forms",
+	"main": "dist/fetchforms.main.prod.js",
+	"module": "dist/fetchforms.main.prod.js",
+	"license": "MIT",
+	"author": "@lukefrogger",
+	"files": [
+		"dist",
+		"README.md"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/fetchforms/fetch-forms-javascript.git"
+	},
 	"scripts": {
-		"start": "webpack serve --hot --config webpack.dev.js",
+		"serve": "webpack serve --hot --config webpack.dev.js",
 		"build": "webpack --config webpack.prod.js"
 	},
 	"keywords": [
 		"form",
-		"form",
-		"builder"
+		"form builder",
+		"headless",
+		"jamstack",
+		"fetch"
 	],
-	"author": "lukefrogger",
-	"license": "MIT",
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 2 chrome version",
+			"last 2 firefox version",
+			"last 2 safari version"
+		]
+	},
 	"devDependencies": {
 		"@babel/cli": "^7.17.3",
 		"@babel/core": "^7.17.5",

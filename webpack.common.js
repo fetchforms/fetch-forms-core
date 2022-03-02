@@ -1,9 +1,9 @@
 module.exports = {
 	entry: {
-		app: "./src/index.js",
+		main: "./src/index.js",
+		embed: "./src/embed.js",
 	},
 	output: {
-		filename: "fetchforms.js",
 		library: "fetchforms",
 		clean: true,
 	},
