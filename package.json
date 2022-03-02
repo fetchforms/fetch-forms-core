@@ -1,6 +1,7 @@
 {
 	"name": "@fetchforms/core",
-	"version": "1.0.0",
+	"version": "0.1.0-beta.1",
+	"private": false,
 	"description": "The core javascript library for Fetch Forms",
 	"main": "dist/fetchforms.main.prod.js",
 	"module": "dist/fetchforms.main.prod.js",
@@ -16,7 +17,8 @@
 	},
 	"scripts": {
 		"serve": "webpack serve --hot --config webpack.dev.js",
-		"build": "webpack --config webpack.prod.js"
+		"build": "webpack --config webpack.prod.js",
+		"package": "npm run build && npm publish"
 	},
 	"keywords": [
 		"form",
