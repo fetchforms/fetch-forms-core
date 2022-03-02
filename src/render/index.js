@@ -8,10 +8,16 @@ import { validate } from "./logic/validation";
 import registerField from "./logic/registerField";
 import cloudSave from "../api/cloudSave";
 import "../styles/fetch-forms.scss";
+const waitLimit = 100;
 
 export default async function createFetchForm(formId, elementId, onCompleteCallback, onDataCallback) {
-	const placement = document.getElementById(elementId);
+	const placement = await findElement(elementId);
+	if (placement === null) {
+		console.log("Could not find the requested element to mount the Fetch Form.");
+		return;
+	}
 	placement.setAttribute("class", "fetch-form");
+
 	let fetchForm;
 	let submitButton;
 
@@ -50,6 +56,7 @@ export default async function createFetchForm(formId, elementId, onCompleteCallb
 	[...htmlForm].forEach((input) => registerField(input, fetchForm.formItems, form));
 
 	placement.appendChild(htmlForm);
+	return placement;
 
 	async function onSubmit(values) {
 		submitButton.setAttribute("disabled", "disabled");
@@ -88,6 +95,19 @@ export default async function createFetchForm(formId, elementId, onCompleteCallb
 		}
 		submitButton.removeAttribute("disabled");
 	}
+}
+
+async function findElement(elementId) {
+	let placement = document.getElementById(elementId);
+
+	for (let i = 0; i < waitLimit; i++) {
+		if (placement) {
+			return placement;
+		}
+		await new Promise((resolve) => setTimeout(resolve, 50));
+		placement = document.getElementById(elementId);
+	}
+	return placement;
 }
 
 function overrideSubmit(htmlForm, form) {

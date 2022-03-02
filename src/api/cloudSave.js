@@ -8,7 +8,7 @@ export default async function cloudSave(formSlug, body) {
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${getPermission()}`,
 		},
-		body: JSON.stringify(respBody),
+		body: JSON.stringify({ submission: body }),
 	});
 
 	if (resp.status === 204) {

@@ -5,6 +5,7 @@ module.exports = {
 	},
 	output: {
 		library: "fetchforms",
+		libraryTarget: "umd",
 		clean: true,
 	},
 	module: {

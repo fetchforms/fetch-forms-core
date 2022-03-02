@@ -1,10 +1,10 @@
 {
 	"name": "@fetchforms/core",
-	"version": "0.1.0-beta.1",
+	"version": "0.1.0-beta.2",
 	"private": false,
 	"description": "The core javascript library for Fetch Forms",
-	"main": "dist/fetchforms.main.prod.js",
-	"module": "dist/fetchforms.main.prod.js",
+	"main": "dist/main.prod.js",
+	"module": "dist/main.prod.js",
 	"license": "MIT",
 	"author": "@lukefrogger",
 	"files": [
@@ -18,7 +18,8 @@
 	"scripts": {
 		"serve": "webpack serve --hot --config webpack.dev.js",
 		"build": "webpack --config webpack.prod.js",
-		"package": "npm run build && npm publish"
+		"package": "npm run build && npm publish",
+		"build:babel": "rm -rf dist && NODE_ENV=production babel src --out-dir dist --copy-files"
 	},
 	"keywords": [
 		"form",
@@ -46,6 +47,8 @@
 		"@babel/preset-env": "^7.16.11",
 		"@babel/runtime": "^7.17.2",
 		"babel-loader": "^8.2.3",
+		"babel-plugin-transform-scss": "^1.1.0",
+		"babel-preset-minify": "^0.5.1",
 		"copy-webpack-plugin": "^10.2.4",
 		"css-loader": "^6.6.0",
 		"sass": "^1.49.9",

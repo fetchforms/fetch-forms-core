@@ -5,7 +5,7 @@ const path = require("path");
 module.exports = merge(common, {
 	mode: "development",
 	output: {
-		filename: "fetchforms.[name].dev.js",
+		filename: "[name].dev.js",
 		path: path.resolve(__dirname, "public"),
 	},
 	devtool: "inline-source-map",
