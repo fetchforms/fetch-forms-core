@@ -1,7 +1,7 @@
 import createInput from "./createInput";
 import createLabel from "./createLabel";
 
-export default function createCheckbox(fieldHtml) {
+export default function createCheckbox(fieldHtml, label) {
 	const checkbox = document.createElement("div");
 	checkbox.setAttribute("class", "fetch-input-group");
 
@@ -12,7 +12,7 @@ export default function createCheckbox(fieldHtml) {
 
 	const labelDiv = document.createElement("div");
 	labelDiv.setAttribute("class", "input-group-label");
-	labelDiv.appendChild(createLabel(option.label, option.value));
+	labelDiv.appendChild(createLabel(label, fieldHtml.id, "noMargin"));
 	checkbox.appendChild(labelDiv);
 
 	return checkbox;

@@ -1,4 +1,4 @@
-export default function createInput(fieldHtml, className) {
+export default function createInput(fieldHtml, className, hasFormat) {
 	var inputField = document.createElement("input");
 
 	const htmlKeys = Object.keys(fieldHtml);
@@ -7,6 +7,9 @@ export default function createInput(fieldHtml, className) {
 	}
 
 	inputField.setAttribute("class", className || "fetch-input");
+	if (hasFormat) {
+		inputField.setAttribute("type", "text");
+	}
 
 	return inputField;
 }
