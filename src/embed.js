@@ -14,12 +14,20 @@ export default (async function () {
 	currentScript.after(placement);
 	setPermission(dataAttrs.permission);
 
-	const onCompleteCallback = (data) => {
-		console.log("onComplete", JSON.stringify(data, null, 2));
-	};
-	const onDataCallback = (data) => {
-		console.log("onData", JSON.stringify(data, null, 2));
-	};
+	const onCompleteCallback = (data) =>
+		currentScript.dispatchEvent(
+			new CustomEvent("onFetchFormComplete", {
+				bubbles: true,
+				detail: () => data,
+			})
+		);
+	const onDataCallback = (data) =>
+		currentScript.dispatchEvent(
+			new CustomEvent("onFetchFormLoad", {
+				bubbles: true,
+				detail: () => data,
+			})
+		);
 
 	await createFetchForm(dataAttrs.slug, placementId, onCompleteCallback, onDataCallback);
 })();
