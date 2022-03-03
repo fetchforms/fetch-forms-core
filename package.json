@@ -1,6 +1,6 @@
 {
 	"name": "@fetchforms/core",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"private": false,
 	"description": "The core javascript library for Fetch Forms",
 	"main": "dist/main.prod.js",
@@ -13,7 +13,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/fetchforms/fetch-forms-javascript.git"
+		"url": "git+https://github.com/fetchforms/fetch-forms-core.git"
 	},
 	"scripts": {
 		"serve": "webpack serve --hot --config webpack.dev.js",
