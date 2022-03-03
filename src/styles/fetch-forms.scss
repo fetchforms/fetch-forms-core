@@ -77,7 +77,7 @@ $font-size: 16px;
 
         .fetch-input-group {
             display: flex;
-            &:not(:last-child) {
+            &:not(:last-of-type) {
                 margin-bottom: 5px;
             }
             margin-bottom: 1px;
@@ -86,7 +86,6 @@ $font-size: 16px;
                 cursor: pointer;
                 display: flex;
                 align-items: center;
-                margin-bottom: 2px;
             }
             .input-group-label {
                 cursor: pointer;

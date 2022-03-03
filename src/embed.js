@@ -3,14 +3,7 @@ import { setPermission } from "./auth/permission";
 import createFetchForm from "./render/index";
 
 // auto-run the script
-const embedForm = document.addEventListener("readystatechange", (event) => {
-	if (event.target.readyState === "interactive" || event.target.readyState === "complete") {
-		processEmbed();
-	}
-});
-embedForm();
-
-export default async function processEmbed() {
+export default (async function () {
 	const currentScript = document.currentScript;
 	const dataAttrs = currentScript.dataset;
 	const placement = document.createElement("div");
@@ -29,4 +22,4 @@ export default async function processEmbed() {
 	};
 
 	await createFetchForm(dataAttrs.slug, placementId, onCompleteCallback, onDataCallback);
-}
+})();
