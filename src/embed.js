@@ -1,6 +1,7 @@
 import "./styles/fetch-forms.scss";
 import { setPermission } from "./auth/permission";
 import createFetchForm from "./render/index";
+import createSuccessMessage from "./render/components/createSuccess";
 
 // auto-run the script
 export default (async function () {
@@ -14,20 +15,23 @@ export default (async function () {
 	currentScript.after(placement);
 	setPermission(dataAttrs.permission);
 
-	const onCompleteCallback = (data) =>
+	const onCompleteCallback = (data) => {
 		currentScript.dispatchEvent(
 			new CustomEvent("onFetchFormComplete", {
 				bubbles: true,
 				detail: () => data,
 			})
 		);
-	const onDataCallback = (data) =>
+	};
+
+	const onDataCallback = (data) => {
 		currentScript.dispatchEvent(
 			new CustomEvent("onFetchFormLoad", {
 				bubbles: true,
 				detail: () => data,
 			})
 		);
+	};
 
 	await createFetchForm(dataAttrs.slug, placementId, onCompleteCallback, onDataCallback);
 })();

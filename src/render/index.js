@@ -8,6 +8,7 @@ import { validate } from "./logic/validation";
 import registerField from "./logic/registerField";
 import cloudSave from "../api/cloudSave";
 import "../styles/fetch-forms.scss";
+import createSuccessMessage from "./components/createSuccess";
 const waitLimit = 100;
 
 export default async function createFetchForm(formId, elementId, onCompleteCallback, onDataCallback) {
@@ -23,7 +24,7 @@ export default async function createFetchForm(formId, elementId, onCompleteCallb
 
 	try {
 		fetchForm = await getForm(formId);
-		onDataCallback({ name: fetchForm.name, id: fetchForm.id, version: fetchForm.version });
+		onDataCallback && onDataCallback({ name: fetchForm.name, id: fetchForm.id, version: fetchForm.version });
 	} catch (err) {
 		console.error("Error on render form", err);
 		placement.appendChild(createAlert(err));
@@ -89,11 +90,13 @@ export default async function createFetchForm(formId, elementId, onCompleteCallb
 					throw hasError;
 				}
 			}
+
+			placement.replaceChildren(createSuccessMessage("You're entry has been saved!"));
 		} catch (err) {
 			console.log(err);
-			placement.appendChild(createAlert(err));
+			submitButton.before(createAlert(err));
+			submitButton.removeAttribute("disabled");
 		}
-		submitButton.removeAttribute("disabled");
 	}
 }
 

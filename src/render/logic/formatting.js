@@ -6,7 +6,7 @@ export function formatValue(template, fieldType, value) {
 	}
 
 	if (!template && fieldType === "number") {
-		return new Intl.NumberFormat().format(value);
+		return Number(value);
 	}
 
 	// All items below this require a template
