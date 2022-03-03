@@ -1,4 +1,5 @@
-export default function createInput(fieldHtml, className, hasFormat) {
+export default function createInput(fieldHtml, className, format) {
+	const cssFormatClass = format && format.includes("#") ? null : format;
 	var inputField = document.createElement("input");
 
 	const htmlKeys = Object.keys(fieldHtml);
@@ -6,8 +7,8 @@ export default function createInput(fieldHtml, className, hasFormat) {
 		inputField.setAttribute(key, fieldHtml[key]);
 	}
 
-	inputField.setAttribute("class", className || "fetch-input");
-	if (hasFormat) {
+	inputField.setAttribute("class", className || `fetch-input ${cssFormatClass}`);
+	if (format) {
 		inputField.setAttribute("type", "text");
 	}
 
