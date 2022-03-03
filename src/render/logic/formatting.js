@@ -16,7 +16,7 @@ export function formatValue(template, fieldType, value) {
 
 	if (template.includes("#")) {
 		const formatted = formatString(template.replace(/[#\d]/g, "9"), value);
-		console.log(formatted);
+		// console.log(formatted);
 		return formatted;
 	} else if (template === "currency") {
 		const onlyNumbers = value.replace(/[^\d]/g, "");
