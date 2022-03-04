@@ -1,7 +1,5 @@
-import "./styles/fetch-forms.scss";
 import { setPermission } from "./auth/permission";
 import createFetchForm from "./render/index";
-import createSuccessMessage from "./render/components/createSuccess";
 
 // auto-run the script
 export default (async function () {
