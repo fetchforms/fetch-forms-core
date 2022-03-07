@@ -24,7 +24,10 @@ export default async function createFetchForm(formId, elementId, onCompleteCallb
 
 	try {
 		fetchForm = await getForm(formId);
-		onDataCallback && onDataCallback({ name: fetchForm.name, id: fetchForm.id, version: fetchForm.version });
+		if (onDataCallback) {
+			const { formItems, ...noFields } = fetchForm;
+			onDataCallback(noFields);
+		}
 	} catch (err) {
 		console.error("Error on render form", err);
 		placement.appendChild(createAlert(err));
