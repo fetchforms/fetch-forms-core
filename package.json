@@ -1,6 +1,6 @@
 {
 	"name": "@fetchforms/core",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"private": false,
 	"description": "The core javascript library for Fetch Forms",
 	"main": "dist/main.prod.js",
